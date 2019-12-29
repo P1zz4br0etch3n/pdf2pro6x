@@ -1,7 +1,6 @@
 import argparse
 import io
 import os
-from urllib import parse
 from uuid import uuid4
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
