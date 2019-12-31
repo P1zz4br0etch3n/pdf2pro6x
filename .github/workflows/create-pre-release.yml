@@ -19,10 +19,15 @@ jobs:
         with:
           python-version: '3.7'
       - name: Install Pipenv
-        uses: dschep/install-pipenv-action@v1
-      - name: Build project
+        uses: VaultVulp/action-pipenv@v1.0.0
+      - name: Build project on Mac
+        if: matrix.os == 'macos-latest'
         run: |
           pipenv install --dev && pipenv run pyinstaller -F pdf2pro6x.py
+      - name: Build project on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          pipenv install --dev -and pipenv run pyinstaller -F pdf2pro6x.py
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
