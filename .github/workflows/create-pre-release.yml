@@ -7,7 +7,10 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -29,13 +32,25 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           prerelease: true
-      - name: Upload Release Asset
-        id: upload-release-asset 
+      - name: Upload Release Asset Windows
+        if: matrix.os == 'windows-latest'
+        id: upload-release-asset-windows
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./dist/pdf2pro6x.exe
+          asset_name: pdf2pro6x_win_x64.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+      - name: Upload Release Asset macOS
+        if: matrix.os == 'macos-latest'
+        id: upload-release-asset-macos
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./dist/pdf2pro6x
-          asset_name: pdf2pro6x
+          asset_name: pdf2pro6x_mac_x64
           asset_content_type: application/octet-stream
