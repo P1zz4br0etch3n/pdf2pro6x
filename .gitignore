@@ -3,3 +3,5 @@
 *.pdf
 *.pro6x
 *.exe
+build/
+*.spec
