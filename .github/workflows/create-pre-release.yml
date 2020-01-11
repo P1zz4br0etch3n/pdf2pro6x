@@ -17,12 +17,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: '3.6'
-      - name: Install pipenv
-        uses: dschep/install-pipenv-action@v1
+          python-version: '3.7'
       - name: Build project
         run: |
-          pipenv install --dev && pipenv run pyinstaller -F pdf2pro6x.py
+          pip install -r requirements.txt && pyinstaller -F pdf2pro6x.py
         shell: bash
       - name: Create Release
         id: create_release
