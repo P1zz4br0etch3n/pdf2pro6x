@@ -2,7 +2,7 @@
 Convert PDF files to ProPresenter 6 Bundle files.
 
 ## Get started
-Prerequisite: pdf2pro6x uses pdf2image which uses poppler, so make sure you have it installed. See [pdf2image](https://github.com/Belval/pdf2image).
+Prerequisite: pdf2pro6x uses pdf2image which uses poppler, so make sure you have it installed. See [pdf2image](https://github.com/Belval/pdf2image#how-to-install).
 
 **Hint: I recommend using a virtualenv to not mix dependencies from different projects.**
 
@@ -17,7 +17,7 @@ python pdf2pro6x.py path_to_pdf
 ```
 
 ## Create single executable file
-**Hint: Pre-built executables for MacOS & Windows can be found in the Release Assets.**
+**Hint: Pre-built executables for MacOS & Windows can be found in the [Release](https://github.com/P1zz4br0etch3n/pdf2pro6x/releases) Assets.**
 
 First you have to install pyinstaller:
 ```shell script
