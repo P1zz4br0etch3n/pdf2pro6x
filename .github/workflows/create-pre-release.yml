@@ -14,10 +14,12 @@ jobs:
         include:
           - os: windows-latest
             file: 'dist/pdf2pro6x.exe'
+            folder: 'dist\pdf2pro6x_gui\'
             artifact1: 'pdf2pro6x_win_x64.exe'
             artifact2: 'pdf2pro6x_gui_win_x64.zip'
           - os: macos-latest
             file: 'dist/pdf2pro6x'
+            folder: 'dist/pdf2pro6x/'
             artifact1: 'pdf2pro6x_mac_x64'
             artifact2: 'pdf2pro6x_gui_mac_x64.zip'
     steps:
@@ -29,7 +31,7 @@ jobs:
           python-version: '3.7'
       - name: Build project
         run: |
-          pip install -r requirements.txt && pyinstaller -F pdf2pro6x.py && mv ${{ matrix.file }} ${{ matrix.artifact1 }} && pyinstaller -w pdf2pro6x_gui.py && python zip_gui_files.py ${{ matrix.artifact2 }} dist/pdf2pro6x_gui/*
+          pip install -r requirements.txt && pyinstaller -F pdf2pro6x.py && mv ${{ matrix.file }} ${{ matrix.artifact1 }} && pyinstaller -w pdf2pro6x_gui.py && python zip_gui_files.py ${{ matrix.artifact2 }} ${{ matrix.folder }}
         shell: bash
       - name: Create Release & Upload binary
         uses: ncipollo/release-action@v1
