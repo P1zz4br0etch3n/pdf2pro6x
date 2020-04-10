@@ -37,4 +37,4 @@ jobs:
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
-          artifacts: [${{ matrix.artifact1 }}, ${{ matrix.artifact2 }}]
+          artifacts: ${{ matrix.artifact1 }}, ${{ matrix.artifact2 }}
