@@ -2,7 +2,7 @@ import argparse
 import io
 import os
 from uuid import uuid4
-from xml.etree import ElementTree as ET
+from xml.etree import ElementTree
 from zipfile import ZipFile
 
 from pdf2image import convert_from_path
@@ -42,12 +42,12 @@ def create_image_buffers(path_to_pdf):
 
 
 def create_pro6_buffer(name, number_images):
-    presentation: ET.Element = ET.fromstring(PRESENTATION)
+    presentation: ElementTree.Element = ElementTree.fromstring(PRESENTATION)
     presentation.find(".//RVSlideGrouping").set('uuid', generate_uuid())
     slides = presentation.find(".//array[@rvXMLIvarName='slides']")
 
     for index in range(number_images):
-        display_slide = ET.fromstring(SLIDE)
+        display_slide = ElementTree.fromstring(SLIDE)
         display_slide.set('UUID', generate_uuid())
         image_element = display_slide.find('.//RVImageElement')
         image_element.set('UUID', generate_uuid())
@@ -55,7 +55,7 @@ def create_pro6_buffer(name, number_images):
         slides.append(display_slide)
 
     file_buffer = io.BytesIO()
-    ET.ElementTree(presentation).write(file_buffer, encoding='UTF-8', xml_declaration=True)
+    ElementTree.ElementTree(presentation).write(file_buffer, encoding='UTF-8', xml_declaration=True)
     return file_buffer
 
 
