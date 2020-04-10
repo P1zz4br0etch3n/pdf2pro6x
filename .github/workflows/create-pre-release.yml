@@ -19,7 +19,7 @@ jobs:
             artifact2: 'pdf2pro6x_gui_win_x64.zip'
           - os: macos-latest
             file: 'dist/pdf2pro6x'
-            folder: 'dist/pdf2pro6x/'
+            folder: 'dist/pdf2pro6x_gui/'
             artifact1: 'pdf2pro6x_mac_x64'
             artifact2: 'pdf2pro6x_gui_mac_x64.zip'
     steps:
