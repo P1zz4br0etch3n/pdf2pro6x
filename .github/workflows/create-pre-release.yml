@@ -13,25 +13,30 @@ jobs:
         os: [windows-latest, macos-latest]
         include:
           - os: windows-latest
-            file: 'dist/pdf2pro6x.exe'
-            folder: 'dist\\pdf2pro6x_gui\\'
-            artifact1: 'pdf2pro6x_win_x64.exe'
-            artifact2: 'pdf2pro6x_gui_win_x64.zip'
+            executable: 'dist/pdf2pro6x.exe'
+            installer: 'target/pdf2pro6xSetup.exe'
+            artifact1: 'pdf2pro6x_cli_win_x64.exe'
+            artifact2: 'pdf2pro6x_win_x64_setup.exe'
           - os: macos-latest
-            file: 'dist/pdf2pro6x'
-            folder: 'dist/pdf2pro6x_gui/'
-            artifact1: 'pdf2pro6x_mac_x64'
-            artifact2: 'pdf2pro6x_gui_mac_x64.zip'
+            executable: 'dist/pdf2pro6x'
+            installer: 'target/pdf2pro6x.dmg'
+            artifact1: 'pdf2pro6x_cli_mac_x64'
+            artifact2: 'pdf2pro6x_mac_x64.dmg'
     steps:
+      - name: Install NSIS
+        uses: crazy-max/ghaction-chocolatey@v1.1.0
+        with:
+          args: install nsis
+        if: matrix.os == 'windows-latest'
       - name: Checkout code
         uses: actions/checkout@master
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: '3.7'
+          python-version: '3.5'
       - name: Build project
         run: |
-          pip install -r requirements.txt && pyinstaller -F pdf2pro6x.py && mv ${{ matrix.file }} ${{ matrix.artifact1 }} && pyinstaller -w pdf2pro6x_gui.py && python zip_gui_files.py ${{ matrix.artifact2 }} ${{ matrix.folder }}
+          pip install -r requirements.txt && pyinstaller -F src/main/python/pdf2pro6x.py && mv ${{ matrix.executable }} ${{ matrix.artifact1 }} && fbs freeze && fbs installer && mv ${{ matrix.installer }} ${{ matrix.artifact2 }}
         shell: bash
       - name: Create Release & Upload binary
         uses: ncipollo/release-action@v1

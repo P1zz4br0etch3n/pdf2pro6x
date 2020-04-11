@@ -42,7 +42,7 @@ def create_image_buffers(path_to_pdf):
 
 
 def create_pro6_buffer(name, number_images):
-    presentation: ElementTree.Element = ElementTree.fromstring(PRESENTATION)
+    presentation = ElementTree.fromstring(PRESENTATION)
     presentation.find(".//RVSlideGrouping").set('uuid', generate_uuid())
     slides = presentation.find(".//array[@rvXMLIvarName='slides']")
 

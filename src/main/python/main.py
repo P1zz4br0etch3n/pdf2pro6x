@@ -3,6 +3,7 @@ import sys
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow
+from fbs_runtime.application_context.PyQt5 import ApplicationContext
 from pdf2image.exceptions import PDFInfoNotInstalledError
 
 from gui.main import Ui_MainWindow
@@ -47,11 +48,11 @@ class MainWindow(QMainWindow):
 if __name__ == '__main__':
     path_to_pdf = sys.argv[1] if len(sys.argv) > 1 else None
 
-    app = QtWidgets.QApplication(sys.argv)
+    appctxt = ApplicationContext()
     MainWindow = MainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     if path_to_pdf:
         MainWindow.set_path_to_pdf(path_to_pdf)
     MainWindow.show()
-    sys.exit(app.exec_())
+    sys.exit(appctxt.app.exec_())

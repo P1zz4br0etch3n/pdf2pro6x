@@ -1,4 +1,4 @@
-pyinstaller
+fbs
 pdf2image
 PyQt5
 PyQt5-stubs

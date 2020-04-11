@@ -3,7 +3,8 @@
 *.pdf
 *.pro6x
 *.exe
-build/
+/build/
 *.spec
 __pycache__/
 venv/
+dist/
