@@ -4,7 +4,11 @@
 *.pro6x
 *.exe
 /build/
+/target/
 *.spec
 __pycache__/
 venv/
 dist/
+*.pyd
+*.dll
+*.log
