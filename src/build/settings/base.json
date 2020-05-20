@@ -2,5 +2,5 @@
     "app_name": "pdf2pro6x",
     "author": "Aron Schmidt",
     "main_module": "src/main/python/main.py",
-    "version": "0.3.2"
+    "version": "0.3.3"
 }
