@@ -30,8 +30,8 @@ def get_image_filename(name, index):
     return name + '-' + str(index + 1) + '.png'
 
 
-def create_image_buffers(path_to_pdf):
-    images = convert_from_path(path_to_pdf, size=(1920, 1080))
+def create_image_buffers(path_to_pdf, poppler_path=None):
+    images = convert_from_path(path_to_pdf, size=(1920, 1080), poppler_path=poppler_path)
     image_buffers = []
     for index, image in enumerate(images):
         image_buffer = io.BytesIO()
@@ -70,10 +70,11 @@ def create_pro6x_file(path_to_pro6x, name, image_buffers, pro6_buffer):
     zip_file.close()
 
 
-def main(path_to_pdf):
-    path_to_pro6x = change_extension(path_to_pdf, 'pro6x')
+def main(path_to_pdf, path_to_pro6x=None, poppler_path=None):
+    if not path_to_pro6x:
+        path_to_pro6x = change_extension(path_to_pdf, 'pro6x')
     name = get_name_from_path(path_to_pdf)
-    image_buffers = create_image_buffers(path_to_pdf)
+    image_buffers = create_image_buffers(path_to_pdf, poppler_path)
     pro6_buffer = create_pro6_buffer(name, len(image_buffers))
     create_pro6x_file(path_to_pro6x, name, image_buffers, pro6_buffer)
 
