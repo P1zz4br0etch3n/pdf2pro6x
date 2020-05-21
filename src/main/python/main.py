@@ -1,5 +1,4 @@
 import os
-import subprocess
 import sys
 
 from PyQt5 import QtWidgets
@@ -11,18 +10,7 @@ from pdf2image.exceptions import PDFInfoNotInstalledError
 from gui.main import Ui_MainWindow
 from gui.poppler_not_installed_dialog import Ui_PopplerNotInstalledDialog
 from gui.success_dialog import Ui_SuccessDialog
-from pdf2pro6x import main
-
-
-def _get_poppler_path_on_mac():
-    process = subprocess.run(['which', 'pdfinfo'], stdout=subprocess.PIPE)
-    print('try to find poppler path. return code is %d' % process.returncode)
-    if process.returncode == 0:
-        path = process.stdout.decode('utf-8').replace('/pdfinfo\n', '')
-        print('path is %s' % path)
-        return path
-    else:
-        return None
+from pdf2pro6x import main, change_extension
 
 
 class HideOnAcceptDialog(QtWidgets.QDialog):
@@ -51,7 +39,8 @@ class MainWindow(QMainWindow):
             ui_dialog = None
 
             try:
-                path_to_pro6x, _ = QtWidgets.QFileDialog().getSaveFileName(filter='*.pro6x')
+                directory = change_extension(path_to_pdf, 'pro6x')
+                path_to_pro6x, _ = QtWidgets.QFileDialog().getSaveFileName(filter='*.pro6x', directory=directory)
                 if path_to_pro6x:
                     main(path_to_pdf, path_to_pro6x, poppler_path)
                     ui_dialog = Ui_SuccessDialog()
@@ -65,13 +54,13 @@ class MainWindow(QMainWindow):
 
 if __name__ == '__main__':
     path_to_pdf = sys.argv[1] if len(sys.argv) > 1 else None
-    poppler_path = _get_poppler_path_on_mac() if is_mac() else None
+    poppler_path = '/usr/local/bin' if is_mac() else None
 
     appctxt = ApplicationContext()
     MainWindow = MainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    if path_to_pdf:
+    if path_to_pdf and os.path.exists(path_to_pdf):
         MainWindow.set_path_to_pdf(path_to_pdf)
     MainWindow.show()
     sys.exit(appctxt.app.exec_())
