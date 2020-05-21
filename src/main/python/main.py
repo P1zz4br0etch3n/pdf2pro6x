@@ -16,8 +16,11 @@ from pdf2pro6x import main
 
 def _get_poppler_path_on_mac():
     process = subprocess.run(['which', 'pdfinfo'], stdout=subprocess.PIPE)
+    print('try to find poppler path. return code is %d' % process.returncode)
     if process.returncode == 0:
-        return process.stdout.decode('utf-8').replace('/pdfinfo', '')
+        path = process.stdout.decode('utf-8').replace('/pdfinfo\n', '')
+        print('path is %s' % path)
+        return path
     else:
         return None
 
