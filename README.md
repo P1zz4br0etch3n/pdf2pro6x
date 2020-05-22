@@ -5,6 +5,8 @@ Convert PDF files to ProPresenter 6 Bundle files.
 
 ![screenshot windows](screenshots/screenshot_win.png)
 
+![screenshot mac](screenshots/screenshot_mac.png)
+
 ## Prerequisite
 pdf2pro6x uses pdf2image which is based on poppler, so make sure you have the latter installed. See
 [pdf2image](https://github.com/Belval/pdf2image#how-to-install).

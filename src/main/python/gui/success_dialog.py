@@ -1,27 +1,32 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'success_dialog.ui'
+# Form implementation generated from reading ui file 'src/main/python/gui/success_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_SuccessDialog(object):
     def setupUi(self, SuccessDialog):
         SuccessDialog.setObjectName("SuccessDialog")
-        SuccessDialog.resize(154, 71)
+        SuccessDialog.resize(152, 60)
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        SuccessDialog.setFont(font)
+        self.gridLayout = QtWidgets.QGridLayout(SuccessDialog)
+        self.gridLayout.setObjectName("gridLayout")
+        self.label = QtWidgets.QLabel(SuccessDialog)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.buttonBox = QtWidgets.QDialogButtonBox(SuccessDialog)
-        self.buttonBox.setGeometry(QtCore.QRect(40, 30, 71, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.label = QtWidgets.QLabel(SuccessDialog)
-        self.label.setGeometry(QtCore.QRect(10, 10, 141, 16))
-        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
 
         self.retranslateUi(SuccessDialog)
         self.buttonBox.accepted.connect(SuccessDialog.accept)
