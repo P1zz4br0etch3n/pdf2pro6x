@@ -33,3 +33,12 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt  # this can take a while...
 ```
 Now you're ready to go.
+
+## Troubleshooting
+From macOS Big Sur the app window only pops up if the environment variable QT_MAC_WANTS_LAYER is set to "1".
+
+Also you will have to create following symlinks:
+```sh
+$ sudo ln -s /opt/homebrew/bin/pdfinfo /usr/local/bin/pdfinfo
+$ sudo ln -s /opt/homebrew/bin/pdftoppm /usr/local/bin/pdftoppm
+```
