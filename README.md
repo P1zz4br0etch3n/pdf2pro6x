@@ -20,7 +20,7 @@ You can download an installer or the cli version for macos and windows from the
 Just open the app, browse for a PDF file or paste its path and click `Convert`.
 
 ## Development
-Make sure you have qt5 installed and added the bin directory to your PATH:
+Unfortunately fbs only supports Python up to version 3.5. Make sure you have qt5 installed and added the bin directory to your PATH:
 ```sh
 $ brew install qt5
 $ echo 'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"' >> ~/.bashrc
