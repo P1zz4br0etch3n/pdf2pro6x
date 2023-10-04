@@ -18,3 +18,18 @@ You can download an installer or the cli version for macos and windows from the
 
 ## Usage
 Just open the app, browse for a PDF file or paste its path and click `Convert`.
+
+## Development
+Make sure you have qt5 installed and added the bin directory to your PATH:
+```sh
+$ brew install qt5
+$ echo 'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"' >> ~/.bashrc
+```
+Then create a virtualenv, activate it and install the requirements:
+```sh
+$ pip install virtualenv
+$ virtualenv .venv
+$ source .venv/bin/activate
+$ pip install -r requirements.txt  # this can take a while...
+```
+Now you're ready to go.

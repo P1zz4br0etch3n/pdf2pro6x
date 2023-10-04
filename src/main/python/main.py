@@ -1,6 +1,8 @@
 import os
 import sys
 
+os.environ["QT_MAC_WANTS_LAYER"] = "1"
+
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import QDragEnterEvent, QDropEvent
 from PyQt5.QtWidgets import QMainWindow, QLineEdit
